@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SKY GUITAR — Music Beyond the Sky | Official Artist Archive</title>
+  <style>
+    /* 기본 리셋 & 고해상도 글꼴 설정 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #060b14 url('SKY GUITAR BG1.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #e2e8f0;
+      font-family: 'Pretendard', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.85;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* 배경 원본 영롱한 푸른빛과 별빛을 살린 라이트 오버레이 */
+    .page-overlay {
+      background: rgba(10, 25, 50, 0.25);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      min-height: 100vh;
+      padding: 60px 20px 100px;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    /* 상단 헤더 및 입체 조명 효과 타이틀 */
+    header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .brand-sub {
+      font-size: 0.98rem;
+      letter-spacing: 6px;
+      color: #bfdbfe;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      font-weight: 700;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 0 15px rgba(59, 130, 246, 0.8);
+    }
+    .brand-title {
+      font-size: 3.4rem;
+      font-weight: 700;
+      letter-spacing: 5px;
+      color: #ffffff;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9),
+                   0 0 20px rgba(59, 130, 246, 0.9),
+                   0 0 40px rgba(37, 99, 235, 0.7);
+      filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.95));
+    }
+
+    /* 앨범 메인 소개 레이아웃 */
+    .album-hero-grid {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      gap: 50px;
+      align-items: start;
+      background: rgba(10, 20, 38, 0.85);
+      border: 1px solid rgba(147, 197, 253, 0.35);
+      border-radius: 20px;
+      padding: 50px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+      margin-bottom: 50px;
+    }
+
+    /* 좌측: 앨범 커버 프레임 */
+    .album-cover-wrapper {
+      position: sticky;
+      top: 40px;
+      width: 100%;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.65),
+                  0 0 30px rgba(96, 165, 250, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: transform 0.4s ease;
+    }
+    .album-cover-wrapper:hover {
+      transform: translateY(-5px);
+    }
+    .album-cover-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* 우측: 앨범 소개 컨텐츠 */
+    .album-info-content {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    
+    .album-header-block {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .album-badge {
+      display: inline-block;
+      align-self: flex-start;
+      padding: 8px 18px;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(30, 58, 138, 0.4));
+      border: 1px solid rgba(147, 197, 253, 0.6);
+      border-radius: 30px;
+      color: #bfdbfe;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+    }
+    .album-main-title {
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.3;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+    }
+    .album-sub-title {
+      font-size: 1.2rem;
+      color: #93c5fd;
+      font-weight: 500;
+      line-height: 1.6;
+      letter-spacing: 0.5px;
+    }
+
+    /* 메인 카피 인용구 */
+    .quote-box {
+      border-left: 4px solid #60a5fa;
+      margin: 4px 0;
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: #f8fafc;
+      line-height: 1.8;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px 24px;
+      border-radius: 0 12px 12px 0;
+    }
+
+    /* 세부 서사 단락 */
+    .story-paragraph {
+      color: #e2e8f0;
+      font-size: 1.03rem;
+      text-align: justify;
+      word-break: keep-all;
+      line-height: 1.9;
+    }
+    .story-paragraph p {
+      margin-bottom: 18px;
+    }
+
+    /* 하늘 너머 강조 블록 */
+    .highlight-story {
+      background: linear-gradient(90deg, rgba(59, 130, 246, 0.15), transparent);
+      padding: 20px 24px;
+      border-radius: 12px;
+      border-left: 3px solid rgba(96, 165, 250, 0.6);
+      color: #f8fafc;
+      font-style: italic;
+      line-height: 1.8;
+    }
+
+    /* 스트리밍 및 실행 버튼 영역 */
+    .action-block {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 10px;
+    }
+    .action-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .btn-stream {
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.98rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      color: #ffffff;
+      box-shadow: 0 4px 18px rgba(59, 130, 246, 0.4);
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #60a5fa, #2563eb);
+      box-shadow: 0 6px 22px rgba(59, 130, 246, 0.6);
+    }
+    
+    /* 스트리밍 플랫폼 아이콘 바 (상단) */
+    .platform-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 20px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+    }
+    .platform-label {
+      font-size: 0.85rem;
+      color: #cbd5e1;
+      font-weight: 500;
+      margin-right: 6px;
+    }
+    .platform-link {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 14px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(96, 165, 250, 0.3);
+      border-radius: 20px;
+      color: #e2e8f0;
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .platform-link:hover {
+      background: rgba(59, 130, 246, 0.3);
+      border-color: #60a5fa;
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    /* 헌정 배너 (한자 병기 및 마감 부호 최종 적용) */
+    .dedication-banner {
+      background: linear-gradient(135deg, rgba(30, 58, 138, 0.55), rgba(10, 20, 38, 0.9));
+      border: 1px solid rgba(147, 197, 253, 0.4);
+      border-radius: 16px;
+      padding: 36px 40px;
+      margin-bottom: 50px;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    }
+    .dedication-tag-header {
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      color: #93c5fd;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    .dedication-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+    }
+    .dedication-desc {
+      font-size: 1.12rem;
+      color: #e2e8f0;
+      word-break: keep-all;
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    /* MV 비디오 플레이어 섹션 */
+    .mv-section {
+      background: rgba(10, 20, 38, 0.85);
+      border-radius: 20px;
+      padding: 40px;
+      border: 1px solid rgba(96, 165, 250, 0.25);
+      margin-bottom: 50px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* 트랙리스트 섹션 */
+    .archive-section {
+      background: rgba(10, 20, 38, 0.85);
+      border-radius: 20px;
+      padding: 40px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 50px;
+    }
+    .section-title {
+      font-size: 1.6rem;
+      color: #ffffff;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-title::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 22px;
+      background: #3b82f6;
+      border-radius: 2px;
+    }
+
+    .track-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .track-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 28px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.3s ease;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    .track-item:hover {
+      background: rgba(59, 130, 246, 0.15);
+      border-color: rgba(96, 165, 250, 0.4);
+    }
+    .track-left {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+    .track-num {
+      color: #60a5fa;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+    .track-title-text {
+      color: #ffffff;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    .title-track-badge {
+      font-size: 0.75rem;
+      padding: 3px 10px;
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      color: #ffffff;
+      font-weight: 700;
+      border-radius: 4px;
+      margin-left: 10px;
+      letter-spacing: 1px;
+    }
+    
+    .audio-player-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .audio-player-wrapper audio {
+      height: 36px;
+      outline: none;
+      filter: invert(0.9) hue-rotate(180deg);
+      border-radius: 20px;
+    }
+    .preview-badge {
+      font-size: 0.78rem;
+      color: #d1d5db;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    /* 가로 스크롤 앨범 아카이브 캐러셀 섹션 */
+    .discography-section {
+      background: rgba(10, 20, 38, 0.85);
+      border-radius: 20px;
+      padding: 40px;
+      border: 1px solid rgba(96, 165, 250, 0.25);
+    }
+    .discography-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    .carousel-hint {
+      font-size: 0.88rem;
+      color: #cbd5e1;
+    }
+    .carousel-container {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      padding-bottom: 15px;
+      scroll-behavior: smooth;
+    }
+    .carousel-container::-webkit-scrollbar {
+      height: 6px;
+    }
+    .carousel-container::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 3px;
+    }
+    .carousel-container::-webkit-scrollbar-thumb {
+      background: rgba(96, 165, 250, 0.5);
+      border-radius: 3px;
+    }
+    .carousel-container::-webkit-scrollbar-thumb:hover {
+      background: rgba(96, 165, 250, 0.9);
+    }
+
+    .album-card-mini {
+      flex: 0 0 200px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 14px;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .album-card-mini:hover {
+      transform: translateY(-6px);
+      border-color: #60a5fa;
+      background: rgba(59, 130, 246, 0.15);
+    }
+    .album-card-mini img {
+      width: 100%;
+      height: 172px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+    .card-mini-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #ffffff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .card-mini-sub {
+      font-size: 0.8rem;
+      color: #93c5fd;
+      margin-top: 4px;
+    }
+
+    /* 반응형 모바일 처리 */
+    @media (max-width: 992px) {
+      .album-hero-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        padding: 30px;
+      }
+      .album-cover-wrapper {
+        max-width: 380px;
+        margin: 0 auto;
+        position: static;
+      }
+      .track-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .audio-player-wrapper {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .platform-bar {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-overlay">
+    <div class="container">
+
+      <!-- 상단 브랜딩 -->
+      <header>
+        <div class="brand-sub">MUSIC BEYOND THE SKY</div>
+        <h1 class="brand-title">SKY GUITAR ARCHIVE</h1>
+      </header>
+
+      <!-- 앨범 상세소개 구역 -->
+      <main class="album-hero-grid">
+        
+        <!-- 좌측: 앨범 커버 이미지 -->
+        <div class="album-cover-wrapper">
+          <img src="Sky Guitar Vo.1.png" alt="Sky Guitar Vol.1 Music Beyond the Sky Album Cover">
+        </div>
+
+        <!-- 우측: 앨범 소개 서사 및 스트리밍 링크 -->
+        <div class="album-info-content">
+          
+          <div class="album-header-block">
+            <span class="album-badge">The 1st Album</span>
+            <h2 class="album-main-title">Music Beyond the Sky</h2>
+            <div class="album-sub-title">하늘을 가르는 맑고 정갈한 기타 선율과 독보적인 감성</div>
+          </div>
+
+          <div class="quote-box">
+            "하늘을 바라보면, 때로는 하나의 풍경이 음악처럼 다가온다.<br>
+            끝없이 펼쳐진 공간과 그 사이를 흐르는 빛, 그리고 그 풍경을 가만히 바라보며 마음속에 떠오르는 하나의 선율."
+          </div>
+
+          <div class="story-paragraph">
+            <p>
+              Sky Guitar의 첫 번째 앨범 <strong>《Music Beyond the Sky》</strong>는 그러한 순간에서 시작된 기타의 음악입니다.
+              타이틀곡 <strong>〈Pentatonic Landscape〉</strong>는 펜타토닉 스케일의 간결한 음들을 바탕으로 광활한 풍경을 그려낸 록 발라드 기타 연주곡입니다.
+            </p>
+            <p>
+              과장된 기교보다는 선율과 여백에 집중한 기타는 맑고 깨끗한 색채를 유지하면서도 적당한 드라이브와 힘을 품고 있습니다. 
+              때로는 조용히 풍경을 바라보듯 흐르고, 때로는 넓은 하늘을 향해 힘차게 뻗어나간다.
+            </p>
+          </div>
+
+          <div class="highlight-story">
+            "이 곡에서 기타는 단순히 멜로디를 연주하는 악기가 아니라 하나의 풍경을 바라보고, 느끼고, 이야기하는 목소리가 된다. 그리고 그 풍경 너머에는 또 다른 음악이 있다."
+          </div>
+
+          <div class="story-paragraph">
+            <p>
+              Music Beyond the Sky. 하늘은 음악의 끝이 아니라 더 넓은 세계로 향하는 시작입니다. 
+              Sky Guitar는 그 너머를 향해 첫 번째 기타의 선율을 띄웁니다.
+            </p>
+          </div>
+
+          <!-- 상단 스트리밍 연결 및 행동 버튼 영역 -->
+          <div class="action-block">
+            <div class="action-row">
+              <a href="#tracklist" class="btn-stream btn-primary">음원 미리듣기 (Preview)</a>
+            </div>
+            
+            <!-- 유료 스트리밍 플랫폼 아이콘 연결 바 -->
+            <div class="platform-bar">
+              <span class="platform-label">STREAM NOW:</span>
+              <a href="https://www.melon.com" target="_blank" class="platform-link">멜론 (Melon)</a>
+              <a href="https://open.spotify.com" target="_blank" class="platform-link">Spotify</a>
+              <a href="https://music.bugs.co.kr" target="_blank" class="platform-link">벅스 (Bugs)</a>
+              <a href="https://vibe.naver.com" target="_blank" class="platform-link">바이브 (VIBE)</a>
+              <a href="https://music.apple.com" target="_blank" class="platform-link">Apple Music</a>
+            </div>
+          </div>
+
+        </div>
+
+      </main>
+
+      <!-- 헌정 배너 (한자 병기 및 느낌표 위치 최종 확정 적용) -->
+      <section class="dedication-banner">
+        <div class="dedication-tag-header">ARTIST DEDICATION</div>
+        <h3 class="dedication-title">"영원한 음악의 위안(慰安)! Sky Guitar를 위하여..."</h3>
+        <p class="dedication-desc">
+          기쁠 때나 슬플 때, 외롭고 지쳤을 때도 희망의 소리, 'Sky Guitar'가 함께합니다.
+        </p>
+      </section>
+
+      <!-- 타이틀곡 MV 동영상 플레이어 섹션 -->
+      <section id="mv-player" class="mv-section">
+        <h3 class="section-title">Official Music Video</h3>
+        <div class="video-container">
+          <iframe 
+            src="https://www.youtube.com/embed/YOUR_YOUTUBE_VIDEO_ID" 
+            title="Sky Guitar - Music Beyond the Sky Official Music Video" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      </section>
+
+      <!-- 트랙 아카이브 & 일부 미리듣기 섹션 -->
+      <section id="tracklist" class="archive-section">
+        <h3 class="section-title">Tracklist & Audio Preview (일부 듣기)</h3>
+        <div class="track-list">
+          
+          <!-- Track 01 -->
+          <div class="track-item">
+            <div class="track-left">
+              <span class="track-num">01</span>
+              <span class="track-title-text">Silent flow</span>
+            </div>
+            <div class="audio-player-wrapper">
+              <span class="preview-badge">미리듣기</span>
+              <audio controls controlsList="nodownload">
+                <source src="silent_flow_preview.mp3" type="audio/mpeg">
+              </audio>
+            </div>
+          </div>
+
+          <!-- Track 02 (타이틀곡 지정) -->
+          <div class="track-item">
+            <div class="track-left">
+              <span class="track-num">02</span>
+              <span class="track-title-text">Pentatonic Landscape</span>
+              <span class="title-track-badge">TITLE</span>
+            </div>
+            <div class="audio-player-wrapper">
+              <span class="preview-badge">미리듣기</span>
+              <audio controls controlsList="nodownload">
+                <source src="pentatonic_landscape_preview.mp3" type="audio/mpeg">
+              </audio>
+            </div>
+          </div>
+
+          <!-- Track 03 -->
+          <div class="track-item">
+            <div class="track-left">
+              <span class="track-num">03</span>
+              <span class="track-title-text">Moonlight Blues</span>
+            </div>
+            <div class="audio-player-wrapper">
+              <span class="preview-badge">미리듣기</span>
+              <audio controls controlsList="nodownload">
+                <source src="moonlight_blues_preview.mp3" type="audio/mpeg">
+              </audio>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 확장형 Discography 가로 슬라이더 아카이브 -->
+      <section class="discography-section">
+        <div class="discography-header">
+          <h3 class="section-title" style="margin-bottom:0;">Discography & Albums</h3>
+          <span class="carousel-hint">← 가로로 스크롤하여 앨범 탐색 →</span>
+        </div>
+        
+        <div class="carousel-container">
+          <div class="album-card-mini" style="border-color: #60a5fa;">
+            <img src="Sky Guitar Vo.1.png" alt="Sky Guitar Vol.1">
+            <div class="card-mini-title">Music Beyond the Sky</div>
+            <div class="card-mini-sub">Sky Guitar Vol.1 (2026)</div>
+          </div>
+
+          <div class="album-card-mini">
+            <div style="width:100%; height:172px; background:rgba(255,255,255,0.05); border-radius:8px; display:flex; align-items:center; justify-content:center; color:#64748b; font-size:0.85rem;">COMING SOON</div>
+            <div class="card-mini-title" style="color:#64748b;">Sky Guitar Vol.2</div>
+            <div class="card-mini-sub" style="color:#475569;">Upcoming</div>
+          </div>
+
+          <div class="album-card-mini">
+            <div style="width:100%; height:172px; background:rgba(255,255,255,0.05); border-radius:8px; display:flex; align-items:center; justify-content:center; color:#64748b; font-size:0.85rem;">COMING SOON</div>
+            <div class="card-mini-title" style="color:#64748b;">Sky Guitar Vol.3</div>
+            <div class="card-mini-sub" style="color:#475569;">Upcoming</div>
+          </div>
+
+          <div class="album-card-mini">
+            <div style="width:100%; height:172px; background:rgba(255,255,255,0.05); border-radius:8px; display:flex; align-items:center; justify-content:center; color:#64748b; font-size:0.85rem;">COMING SOON</div>
+            <div class="card-mini-title" style="color:#64748b;">Sky Guitar Vol.4</div>
+            <div class="card-mini-sub" style="color:#475569;">Upcoming</div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+</body>
+</html>

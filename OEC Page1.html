@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OEC — Whispering Horizon | Official Artist Archive</title>
+  <style>
+    /* 기본 리셋 & 고해상도 글꼴 설정 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #0d0f12 url('OEC BG1.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #e2e8f0;
+      font-family: 'Pretendard', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.85;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* 배경 오버레이 */
+    .page-overlay {
+      background: rgba(10, 12, 16, 0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      min-height: 100vh;
+      padding: 60px 20px 100px;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    /* [수정 반영] 상단 헤더 및 야간 발광/안개 효과가 적용된 임팩트 타이틀 */
+    header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .brand-sub {
+      font-size: 0.95rem;
+      letter-spacing: 6px;
+      color: #d4af37;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      font-weight: 600;
+      text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+    }
+    .brand-title {
+      font-size: 3.4rem;
+      font-weight: 400;
+      letter-spacing: 5px;
+      color: #ffffff;
+      /* 야간 발광(Glow) 및 살짝 안개가 감싸는 듯한 입체적 그림자 효과 */
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.35),
+                   0 0 30px rgba(212, 175, 55, 0.4),
+                   0 0 50px rgba(212, 175, 55, 0.2);
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.8));
+    }
+
+    /* 앨범 메인 소개 레이아웃 */
+    .album-hero-grid {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      gap: 50px;
+      align-items: start;
+      background: rgba(20, 24, 33, 0.78);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 20px;
+      padding: 50px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55);
+      margin-bottom: 50px;
+    }
+
+    /* 좌측: 앨범 커버 프레임 */
+    .album-cover-wrapper {
+      position: sticky;
+      top: 40px;
+      width: 100%;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.65),
+                  0 0 30px rgba(212, 175, 55, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: transform 0.4s ease;
+    }
+    .album-cover-wrapper:hover {
+      transform: translateY(-5px);
+    }
+    .album-cover-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* 우측: 앨범 소개 컨텐츠 */
+    .album-info-content {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    
+    .album-header-block {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .album-badge {
+      display: inline-block;
+      align-self: flex-start;
+      padding: 8px 18px;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(212, 175, 55, 0.08));
+      border: 1px solid rgba(212, 175, 55, 0.55);
+      border-radius: 30px;
+      color: #f1c40f;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+    }
+    .album-main-title {
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.3;
+      letter-spacing: 0.5px;
+    }
+    .album-sub-title {
+      font-size: 1.2rem;
+      color: #d4af37;
+      font-weight: 400;
+      line-height: 1.6;
+      letter-spacing: 0.5px;
+    }
+
+    /* 메인 카피 인용구 */
+    .quote-box {
+      border-left: 4px solid #d4af37;
+      margin: 4px 0;
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: #f8fafc;
+      line-height: 1.8;
+      background: rgba(255, 255, 255, 0.035);
+      padding: 20px 24px;
+      border-radius: 0 12px 12px 0;
+    }
+
+    /* 세부 서사 단락 */
+    .story-paragraph {
+      color: #cbd5e1;
+      font-size: 1.03rem;
+      text-align: justify;
+      word-break: keep-all;
+      line-height: 1.9;
+    }
+    .story-paragraph p {
+      margin-bottom: 18px;
+    }
+
+    /* 지평선 강조 블록 */
+    .highlight-story {
+      background: linear-gradient(90deg, rgba(212, 175, 55, 0.1), transparent);
+      padding: 20px 24px;
+      border-radius: 12px;
+      border-left: 3px solid rgba(212, 175, 55, 0.5);
+      color: #f1f5f9;
+      font-style: italic;
+      line-height: 1.8;
+    }
+
+    /* 스트리밍 및 실행 버튼 영역 */
+    .action-block {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 10px;
+    }
+    .action-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .btn-stream {
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.98rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #d4af37, #aa7c11);
+      color: #0d0f12;
+      box-shadow: 0 4px 18px rgba(212, 175, 55, 0.35);
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #e5be38, #c49118);
+      box-shadow: 0 6px 22px rgba(212, 175, 55, 0.5);
+    }
+    
+    /* 스트리밍 플랫폼 아이콘 바 (상단) */
+    .platform-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 20px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+    }
+    .platform-label {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      font-weight: 500;
+      margin-right: 6px;
+    }
+    .platform-link {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 14px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 20px;
+      color: #e2e8f0;
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .platform-link:hover {
+      background: rgba(212, 175, 55, 0.2);
+      border-color: #d4af37;
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    /* 진동수 강조 배너 */
+    .vibration-banner {
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(20, 24, 33, 0.85));
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      border-radius: 16px;
+      padding: 32px 40px;
+      margin-bottom: 50px;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    }
+    .vibration-tag-header {
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      color: #d4af37;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    .vibration-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+    .vibration-brand-sub {
+      font-size: 1.05rem;
+      color: #f1c40f;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+    .vibration-desc {
+      font-size: 1.05rem;
+      color: #cbd5e1;
+      word-break: keep-all;
+    }
+    .vibration-tags {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+    }
+    .v-tag {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-size: 0.92rem;
+      color: #e2e8f0;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+    .v-tag:hover {
+      background: rgba(212, 175, 55, 0.22);
+      border-color: #d4af37;
+      color: #ffffff;
+      transform: translateY(-4px);
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+    }
+
+    /* MV 비디오 플레이어 섹션 */
+    .mv-section {
+      background: rgba(18, 22, 30, 0.8);
+      border-radius: 20px;
+      padding: 40px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      margin-bottom: 50px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* 트랙리스트 섹션 */
+    .archive-section {
+      background: rgba(18, 22, 30, 0.8);
+      border-radius: 20px;
+      padding: 40px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 50px;
+    }
+    .section-title {
+      font-size: 1.6rem;
+      color: #ffffff;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-title::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 22px;
+      background: #d4af37;
+      border-radius: 2px;
+    }
+
+    .track-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .track-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 28px;
+      background: rgba(255, 255, 255, 0.035);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: all 0.3s ease;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    .track-item:hover {
+      background: rgba(212, 175, 55, 0.09);
+      border-color: rgba(212, 175, 55, 0.3);
+    }
+    .track-left {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+    .track-num {
+      color: #d4af37;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+    .track-title-text {
+      color: #ffffff;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    .title-track-badge {
+      font-size: 0.75rem;
+      padding: 3px 10px;
+      background: linear-gradient(135deg, #d4af37, #aa7c11);
+      color: #0d0f12;
+      font-weight: 700;
+      border-radius: 4px;
+      margin-left: 10px;
+      letter-spacing: 1px;
+    }
+    
+    .audio-player-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .audio-player-wrapper audio {
+      height: 36px;
+      outline: none;
+      filter: invert(0.9) hue-rotate(180deg);
+      border-radius: 20px;
+    }
+    .preview-badge {
+      font-size: 0.78rem;
+      color: #a1a1aa;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    /* 가로 스크롤 앨범 아카이브 캐러셀 섹션 */
+    .discography-section {
+      background: rgba(18, 22, 30, 0.8);
+      border-radius: 20px;
+      padding: 40px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+    }
+    .discography-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    .carousel-hint {
+      font-size: 0.88rem;
+      color: #94a3b8;
+    }
+    .carousel-container {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      padding-bottom: 15px;
+      scroll-behavior: smooth;
+    }
+    .carousel-container::-webkit-scrollbar {
+      height: 6px;
+    }
+    .carousel-container::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 3px;
+    }
+    .carousel-container::-webkit-scrollbar-thumb {
+      background: rgba(212, 175, 55, 0.4);
+      border-radius: 3px;
+    }
+    .carousel-container::-webkit-scrollbar-thumb:hover {
+      background: rgba(212, 175, 55, 0.8);
+    }
+
+    .album-card-mini {
+      flex: 0 0 200px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 14px;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .album-card-mini:hover {
+      transform: translateY(-6px);
+      border-color: #d4af37;
+      background: rgba(212, 175, 55, 0.08);
+    }
+    .album-card-mini img {
+      width: 100%;
+      height: 172px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+    .card-mini-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #ffffff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .card-mini-sub {
+      font-size: 0.8rem;
+      color: #d4af37;
+      margin-top: 4px;
+    }
+
+    /* 반응형 모바일 처리 */
+    @media (max-width: 992px) {
+      .album-hero-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        padding: 30px;
+      }
+      .album-cover-wrapper {
+        max-width: 380px;
+        margin: 0 auto;
+        position: static;
+      }
+      .track-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .audio-player-wrapper {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .platform-bar {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-overlay">
+    <div class="container">
+
+      <!-- 상단 브랜딩 (야간 발광 및 안개 효과 적용) -->
+      <header>
+        <div class="brand-sub">ORGANIC ETHNIC CROSSOVER</div>
+        <h1 class="brand-title">OEC ARTIST ARCHIVE</h1>
+      </header>
+
+      <!-- 앨범 상세소개 구역 -->
+      <main class="album-hero-grid">
+        
+        <!-- 좌측: 앨범 커버 이미지 -->
+        <div class="album-cover-wrapper">
+          <img src="OEC Vol.1.png" alt="OEC Vol.1 Whispering Horizon Album Cover">
+        </div>
+
+        <!-- 우측: 앨범 소개 서사 및 스트리밍 링크 -->
+        <div class="album-info-content">
+          
+          <div class="album-header-block">
+            <span class="album-badge">1st Official Album</span>
+            <h2 class="album-main-title">Whispering Horizon</h2>
+            <div class="album-sub-title">속삭이는 지평선 — 소리와 문화의 경계를 넘어서</div>
+          </div>
+
+          <div class="quote-box">
+            "자연의 숨결과 동양적 선율의 유기적 결합,<br>
+            OEC(Organic Ethnic Crossover)의 첫 번째 여정이 시작됩니다."
+          </div>
+
+          <div class="story-paragraph">
+            <p>
+              서로 다른 음악의 경계를 넘어 자연스럽게 하나의 풍경을 만들어내는 소리의 미학. 
+              OEC의 첫 번째 앨범 <strong>《Whispering Horizon》</strong>은 현대적인 감각의 유기적 비트 위에 에스닉 악기 고유의 깊은 울림과 오케스트라의 넓은 공간감을 더해, 우리에게 익숙하면서도 신비로운 음악적 풍경을 그려냅니다.
+            </p>
+            <p>
+              섬세한 리듬과 따뜻한 음색, 그리고 악기 사이를 유유히 흐르는 선율은 어느 한 장르에 머물지 않습니다. 
+              재즈의 자유로운 세션 감각과 세계 각지의 음악적 색채, 그리고 클래식 오케스트레이션의 깊이가 서로 만나고 스며들며 단 하나의 유기적인 흐름을 완성합니다.
+            </p>
+          </div>
+
+          <div class="highlight-story">
+            "Whispering Horizon에서 ‘지평선’은 단순히 바라보는 풍경이 아닙니다.<br>
+            서로 다른 음악과 문화가 마주하는 경계이자, 그 경계가 어느 순간 자연스럽게 사라지는 곳입니다."
+          </div>
+
+          <div class="story-paragraph">
+            <p>
+              멀리 펼쳐진 산과 하늘, 저녁빛에 물든 대지 위로 바람이 지나가듯 음악은 조용히 흘러갑니다. 
+              그리고 그 소리는 우리가 미처 듣지 못했던 세계의 이야기를 낮은 목소리로 속삭입니다. 
+              서로 다른 소리가 만나 하나의 이야기가 되는 순간, 그곳에 《Whispering Horizon》이 있습니다.
+            </p>
+          </div>
+
+          <!-- 상단 스트리밍 연결 및 행동 버튼 영역 -->
+          <div class="action-block">
+            <div class="action-row">
+              <a href="#tracklist" class="btn-stream btn-primary">음원 미리듣기 (Preview)</a>
+            </div>
+            
+            <!-- 유료 스트리밍 플랫폼 아이콘 연결 바 -->
+            <div class="platform-bar">
+              <span class="platform-label">STREAM NOW:</span>
+              <a href="https://www.melon.com" target="_blank" class="platform-link">멜론 (Melon)</a>
+              <a href="https://open.spotify.com" target="_blank" class="platform-link">Spotify</a>
+              <a href="https://music.bugs.co.kr" target="_blank" class="platform-link">벅스 (Bugs)</a>
+              <a href="https://vibe.naver.com" target="_blank" class="platform-link">바이브 (VIBE)</a>
+              <a href="https://music.apple.com" target="_blank" class="platform-link">Apple Music</a>
+            </div>
+          </div>
+
+        </div>
+
+      </main>
+
+      <!-- 진동수 강조 배너 -->
+      <section class="vibration-banner">
+        <div class="vibration-tag-header">HIGH VIBRATION SOUND</div>
+        <h3 class="vibration-title">진동수를 높여주는 음악!</h3>
+        <div class="vibration-brand-sub">OEC (Organic Ethnic Crossover)</div>
+        <p class="vibration-desc">
+          몸과 마음의 활력, 그리고 긍정의 에너지가 필요할 때 내면의 진동수를 높여 드립니다.
+        </p>
+        <div class="vibration-tags">
+          <span class="v-tag" title="러닝 관련 콘텐츠 준비 중">🏃‍♂️ 러닝</span>
+          <span class="v-tag" title="헬스 관련 콘텐츠 준비 중">🏋️‍♀️ 헬스</span>
+          <span class="v-tag" title="춤 관련 콘텐츠 준비 중">💃 춤</span>
+          <span class="v-tag" title="산책 관련 콘텐츠 준비 중">🚶‍♂️ 산책</span>
+          <span class="v-tag" title="등산 관련 콘텐츠 준비 중">⛰️ 등산</span>
+        </div>
+      </section>
+
+      <!-- 타이틀곡 MV 동영상 플레이어 섹션 -->
+      <section id="mv-player" class="mv-section">
+        <h3 class="section-title">Official Music Video</h3>
+        <div class="video-container">
+          <iframe 
+            src="https://www.youtube.com/embed/YOUR_YOUTUBE_VIDEO_ID" 
+            title="OEC - Whispering Horizon Official Music Video" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      </section>
+
+      <!-- 트랙 아카이브 & 일부 미리듣기 섹션 -->
+      <section id="tracklist" class="archive-section">
+        <h3 class="section-title">Tracklist & Audio Preview (일부 듣기)</h3>
+        <div class="track-list">
+          
+          <!-- Track 01 -->
+          <div class="track-item">
+            <div class="track-left">
+              <span class="track-num">01</span>
+              <span class="track-title-text">Amber Drift</span>
+            </div>
+            <div class="audio-player-wrapper">
+              <span class="preview-badge">미리듣기</span>
+              <audio controls controlsList="nodownload">
+                <source src="amber_drift_preview.mp3" type="audio/mpeg">
+              </audio>
+            </div>
+          </div>
+
+          <!-- Track 02 -->
+          <div class="track-item">
+            <div class="track-left">
+              <span class="track-num">02</span>
+              <span class="track-title-text">Strolling Breeze</span>
+            </div>
+            <div class="audio-player-wrapper">
+              <span class="preview-badge">미리듣기</span>
+              <audio controls controlsList="nodownload">
+                <source src="strolling_breeze_preview.mp3" type="audio/mpeg">
+              </audio>
+            </div>
+          </div>
+
+          <!-- Track 03 (타이틀곡 지정) -->
+          <div class="track-item">
+            <div class="track-left">
+              <span class="track-num">03</span>
+              <span class="track-title-text">Wind of Midnight</span>
+              <span class="title-track-badge">TITLE</span>
+            </div>
+            <div class="audio-player-wrapper">
+              <span class="preview-badge">미리듣기</span>
+              <audio controls controlsList="nodownload">
+                <source src="wind_of_midnight_preview.mp3" type="audio/mpeg">
+              </audio>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 확장형 Discography 가로 슬라이더 아카이브 -->
+      <section class="discography-section">
+        <div class="discography-header">
+          <h3 class="section-title" style="margin-bottom:0;">Discography & Albums</h3>
+          <span class="carousel-hint">← 가로로 스크롤하여 앨범 탐색 →</span>
+        </div>
+        
+        <div class="carousel-container">
+          <div class="album-card-mini" style="border-color: #d4af37;">
+            <img src="OEC Vol.1.png" alt="OEC Vol.1">
+            <div class="card-mini-title">Whispering Horizon</div>
+            <div class="card-mini-sub">OEC Vol.1 (2026)</div>
+          </div>
+
+          <div class="album-card-mini">
+            <div style="width:100%; height:172px; background:rgba(255,255,255,0.05); border-radius:8px; display:flex; align-items:center; justify-content:center; color:#64748b; font-size:0.85rem;">COMING SOON</div>
+            <div class="card-mini-title" style="color:#64748b;">OEC Vol.2</div>
+            <div class="card-mini-sub" style="color:#475569;">Upcoming</div>
+          </div>
+
+          <div class="album-card-mini">
+            <div style="width:100%; height:172px; background:rgba(255,255,255,0.05); border-radius:8px; display:flex; align-items:center; justify-content:center; color:#64748b; font-size:0.85rem;">COMING SOON</div>
+            <div class="card-mini-title" style="color:#64748b;">OEC Vol.3</div>
+            <div class="card-mini-sub" style="color:#475569;">Upcoming</div>
+          </div>
+
+          <div class="album-card-mini">
+            <div style="width:100%; height:172px; background:rgba(255,255,255,0.05); border-radius:8px; display:flex; align-items:center; justify-content:center; color:#64748b; font-size:0.85rem;">COMING SOON</div>
+            <div class="card-mini-title" style="color:#64748b;">OEC Vol.4</div>
+            <div class="card-mini-sub" style="color:#475569;">Upcoming</div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+</body>
+</html>

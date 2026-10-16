@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REFLECTION-Q — Official Portal</title>
+    <!-- 고급 세리프 폰트 로드 -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Noto+Serif+KR:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Serif KR', serif;
+            background-color: #040d07;
+            color: #ffffff;
+            overflow-x: hidden;
+            /* 페이지 전환 시 부드러운 페이드 효과를 위한 속성 */
+            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+            opacity: 1;
+        }
+
+        /* 페이드 아웃 클래스 (클릭 시 작동) */
+        body.fade-out {
+            opacity: 0;
+            transform: scale(1.02);
+        }
+
+        /* 세로형 풀 스크롤 히어로 구역 */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            min-height: 160vh;
+            background: url('BG.jpg') no-repeat center top;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 120px;
+        }
+
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(to bottom, rgba(4, 13, 7, 0) 0%, rgba(4, 13, 7, 0.8) 50%, #040d07 100%);
+            pointer-events: none;
+        }
+
+        .header {
+            text-align: center;
+            margin-top: 22vh;
+            z-index: 10;
+        }
+
+        .header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            letter-spacing: 0.22em;
+            font-weight: 900;
+            color: #ffffff;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.95), 0 0 30px rgba(0, 0, 0, 0.8);
+            margin-bottom: 12px;
+        }
+
+        .header h1 .accent-letter {
+            font-size: 4.6rem;
+            font-weight: 900;
+            color: #ffffff;
+            text-shadow: 0 4px 25px rgba(0, 0, 0, 0.95), 0 0 35px rgba(255, 255, 255, 0.6);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            letter-spacing: 0.25em;
+            color: #f1f5f9;
+            text-transform: uppercase;
+            font-weight: 400;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.95);
+        }
+
+        .card-container {
+            display: flex;
+            gap: 70px;
+            justify-content: center;
+            align-items: center;
+            max-width: 1400px;
+            width: 90%;
+            margin-top: 10vh;
+            z-index: 10;
+            flex-wrap: wrap;
+        }
+
+        /* 카드 기본 스타일 */
+        .card {
+            width: 340px;
+            height: 510px;
+            border-radius: 18px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.65);
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background-color: transparent;
+            cursor: pointer;
+        }
+
+        /* OEC 카드 전용 감성 인터랙션 호버 (느낌 있는 연출) */
+        .card.oec-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(212, 175, 55, 0.35), 0 20px 40px rgba(0, 0, 0, 0.85);
+            border-color: rgba(212, 175, 55, 0.8);
+        }
+
+        /* 호버 시 내부 배경 이미지 미세 줌인 */
+        .card.oec-card:hover .card-bg {
+            transform: scale(1.08);
+        }
+
+        .card-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.2) 35%, transparent 60%);
+            z-index: 2;
+            transition: background 0.4s ease;
+        }
+
+        .card.oec-card:hover .card-overlay {
+            background: linear-gradient(to top, rgba(10, 12, 16, 0.92) 0%, rgba(212, 175, 55, 0.15) 40%, transparent 70%);
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 3;
+            padding: 25px;
+        }
+
+        .artist-tag {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            color: #fbbf24;
+            letter-spacing: 0.2em;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .card-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .card-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 0.05em;
+        }
+
+        .preview-play-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(251, 191, 36, 0.9);
+            border: none;
+            color: #000000;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            padding-left: 3px;
+            z-index: 4;
+        }
+
+        .preview-play-btn:hover {
+            transform: scale(1.1);
+            background: #ffffff;
+        }
+
+        .card-desc {
+            font-size: 0.88rem;
+            color: #e2e8f0;
+            line-height: 1.5;
+            font-weight: 400;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            padding-top: 12px;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+        }
+
+        /* 기타 공통 스타일 (비디오, 프로젝트, 푸터 등 유지) */
+        .video-section {
+            width: 100%;
+            max-width: 900px;
+            margin: 80px auto 40px auto;
+            z-index: 10;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .video-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            letter-spacing: 0.15em;
+            color: #fbbf24;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: #000;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .projects-section {
+            width: 100%;
+            background: #040d07;
+            padding: 80px 0 100px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            letter-spacing: 0.15em;
+            margin-bottom: 40px;
+            color: #f3f4f6;
+        }
+
+        .horizontal-scroll-container {
+            display: flex;
+            gap: 25px;
+            overflow-x: auto;
+            padding: 20px 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+            scroll-behavior: smooth;
+        }
+
+        .horizontal-scroll-container::-webkit-scrollbar {
+            height: 8px;
+        }
+        .horizontal-scroll-container::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+        }
+
+        .project-card {
+            min-width: 280px;
+            height: 380px;
+            background: rgba(15, 35, 20, 0.88);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 14px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: #fbbf24;
+        }
+
+        .project-badge {
+            font-size: 0.75rem;
+            color: #fbbf24;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .project-name {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #ffffff;
+            margin: 10px 0;
+        }
+
+        .project-desc {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            line-height: 1.5;
+        }
+
+        .project-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            text-align: center;
+            transition: background 0.2s;
+        }
+
+        .project-btn:hover {
+            background: #fbbf24;
+            color: #000000;
+            font-weight: bold;
+        }
+
+        .footer-extension-section {
+            width: 100%;
+            background: linear-gradient(to bottom, #040d07 0%, #100612 35%, #1a0a1a 100%);
+            padding: 100px 20px 60px 20px;
+            position: relative;
+            z-index: 10;
+            text-align: center;
+        }
+
+        .manifesto-box {
+            max-width: 800px;
+            margin: 0 auto 60px auto;
+            padding: 40px;
+            background: rgba(30, 15, 25, 0.85);
+            border: 1px solid rgba(251, 191, 36, 0.35);
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+        }
+
+        .manifesto-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: #fbbf24;
+            letter-spacing: 0.2em;
+            margin-bottom: 15px;
+        }
+
+        .manifesto-text {
+            font-size: 0.95rem;
+            color: #d1d5db;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .news-ticker-box {
+            max-width: 800px;
+            margin: 0 auto 60px auto;
+            text-align: left;
+            background: rgba(35, 18, 30, 0.9);
+            border-radius: 12px;
+            padding: 30px;
+            border: 1px solid rgba(251, 191, 36, 0.25);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .news-header {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: #fbbf24;
+            margin-bottom: 20px;
+            letter-spacing: 0.15em;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 10px;
+        }
+
+        .news-item {
+            font-size: 0.95rem;
+            color: #ffffff;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 400;
+        }
+
+        .news-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .news-item span {
+            color: #fbbf24;
+            font-weight: 600;
+            background: rgba(251, 191, 36, 0.15);
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 35px;
+        }
+
+        .social-btn {
+            padding: 12px 28px;
+            background: rgba(251, 191, 36, 0.12);
+            border: 1px solid rgba(251, 191, 36, 0.45);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            letter-spacing: 0.12em;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            background: #fbbf24;
+            color: #000000;
+            border-color: #fbbf24;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(251, 191, 36, 0.5);
+            font-weight: bold;
+        }
+
+        .copyright {
+            font-size: 0.8rem;
+            color: #9ca3af;
+            letter-spacing: 0.1em;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 히어로 배경 및 메인 라인업 -->
+    <div class="hero-section">
+        
+        <div class="header">
+            <h1><span class="accent-letter">R</span>EFLECTION-<span class="accent-letter">Q</span></h1>
+            <p>The grand shift rising from the unseen.</p>
+        </div>
+
+        <div class="card-container">
+            <!-- [OEC 카드] 클릭 시 시네마틱 페이드 효과와 함께 OEC 상세 페이지로 부드럽게 이동 -->
+            <div class="card oec-card" onclick="goToOECPage(event)">
+                <img src="OEC.png" alt="OEC" class="card-bg">
+                <div class="card-overlay"></div>
+                <div class="card-content">
+                    <div class="artist-tag">ARTIST ARCHIVE</div>
+                    <div class="card-title-row">
+                        <div class="card-title">OEC</div>
+                        <button class="preview-play-btn" onclick="toggleAudio('oec-audio', event)" title="미리듣기">▶</button>
+                        <audio id="oec-audio" src="artist1-music.mp3"></audio>
+                    </div>
+                    <div class="card-desc">Organic Ethnic Crossover — 자연주의 음색과 동서양 크로스오버의 깊은 울림 (클릭하여 상세 아카이브 이동)</div>
+                </div>
+            </div>
+
+            <!-- SKY GUITAR 카드 (추후 연동 대비) -->
+            <div class="card">
+                <img src="SKY GUITAR.png" alt="SKY GUITAR" class="card-bg">
+                <div class="card-overlay"></div>
+                <div class="card-content">
+                    <div class="artist-tag">ARTIST</div>
+                    <div class="card-title-row">
+                        <div class="card-title">SKY GUITAR</div>
+                        <button class="preview-play-btn" onclick="toggleAudio('sky-audio', event)" title="미리듣기">▶</button>
+                        <audio id="sky-audio" src="artist1-music.mp3"></audio>
+                    </div>
+                    <div class="card-desc">Sky Guitar — 하늘을 가르는 맑고 정갈한 기타 선율과 독보적인 감성</div>
+                </div>
+            </div>
+
+            <!-- SWYL 카드 (추후 연동 대비) -->
+            <div class="card">
+                <img src="SWYL.png" alt="SWYL" class="card-bg">
+                <div class="card-overlay"></div>
+                <div class="card-content">
+                    <div class="artist-tag">ARTIST</div>
+                    <div class="card-title-row">
+                        <div class="card-title">SWYL</div>
+                        <button class="preview-play-btn" onclick="toggleAudio('swyl-audio', event)" title="미리듣기">▶</button>
+                        <audio id="swyl-audio" src="artist1-music.mp3"></audio>
+                    </div>
+                    <div class="card-desc">Sound of the Universe — 세월을 이겨낸 대나무 피리와 우주적 서사</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 정중앙 유튜브 비디오 영역 -->
+        <div class="video-section">
+            <div class="video-title">FEATURED RELEASE / SHOWCASE</div>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 하단 가로 스크롤 프로젝트 섹션 -->
+    <div class="projects-section">
+        <h2 class="section-title">REFLECTION-Q PROJECTS</h2>
+        <div class="horizontal-scroll-container">
+            
+            <div class="project-card">
+                <div>
+                    <div class="project-badge">Project 01</div>
+                    <div class="project-name">만고지혜지음</div>
+                    <div class="project-desc">인류가 길이길이 보존하고 승계해야 할 만고의 지혜와 고사성어를 음악으로 승화시킨 대작.</div>
+                </div>
+                <a href="#" class="project-btn">Explore Track</a>
+            </div>
+
+            <div class="project-card">
+                <div>
+                    <div class="project-badge">Project 02</div>
+                    <div class="project-name">대동여지음</div>
+                    <div class="project-desc">대동여지도에서 착안하여 우리 금수강산의 대명산과 명승지의 정기를 소리로 실현한 작업.</div>
+                </div>
+                <a href="#" class="project-btn">Explore Track</a>
+            </div>
+
+            <div class="project-card">
+                <div>
+                    <div class="project-badge">Project 03</div>
+                    <div class="project-name">설화지음</div>
+                    <div class="project-desc">구전되거나 기록으로 내려오는 인류의 유산과 전설, 아름다운 이야기들을 엮어낸 서사 음악.</div>
+                </div>
+                <a href="#" class="project-btn">Explore Track</a>
+            </div>
+
+            <div class="project-card" style="border-style: dashed; opacity: 0.8;">
+                <div>
+                    <div class="project-badge" style="color: #94a3b8;">Upcoming</div>
+                    <div class="project-name">Coming Soon I</div>
+                    <div class="project-desc">새롭게 준비 중인 혁신적인 에스닉 크로스오버 후속 프로젝트.</div>
+                </div>
+                <span class="project-btn" style="background: transparent; color: #94a3b8; border: 1px dashed #64748b;">準備中</span>
+            </div>
+
+            <div class="project-card" style="border-style: dashed; opacity: 0.8;">
+                <div>
+                    <div class="project-badge" style="color: #94a3b8;">Upcoming</div>
+                    <div class="project-name">Coming Soon II</div>
+                    <div class="project-desc">시대를 관통하는 철학적 메시지를 담은 시크릿 앨범 라인업.</div>
+                </div>
+                <span class="project-btn" style="background: transparent; color: #94a3b8; border: 1px dashed #64748b;">準備中</span>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 최하단 정보 섹션 -->
+    <div class="footer-extension-section">
+        
+        <div class="manifesto-box">
+            <div class="manifesto-title">BRAND MANIFESTO</div>
+            <div class="manifesto-text">
+                "보이지 않는 곳에서 피어오르는 대전환의 소리."<br>
+                리플렉션 큐는 자연의 호흡과 인류의 유산을 소리로 빚어내어 세상에 깊은 울림과 정화의 가치를 전달합니다.
+            </div>
+        </div>
+
+        <div class="news-ticker-box">
+            <div class="news-header">LATEST UPDATES & RELEASES</div>
+            <div class="news-item">
+                <p>[Release] 선율려(旋律吕) 데뷔 앨범 《Weathering》 음원 마스터링 완료</p>
+                <span>2026.10</span>
+            </div>
+            <div class="news-item">
+                <p>[Project] 대동여지음 시리즈 필드 아카이브 및 사운드 디자인 세팅</p>
+                <span>2026.10</span>
+            </div>
+        </div>
+
+        <div class="social-links">
+            <a href="#" class="social-btn">YouTube</a>
+            <a href="#" class="social-btn">Official Blog</a>
+            <a href="#" class="social-btn">Sound Archive</a>
+        </div>
+
+        <div class="copyright">
+            © 2026 REFLECTION-Q. All Rights Reserved. Designed for Organic Ethnic Crossover.
+        </div>
+
+    </div>
+
+    <!-- 시네마틱 전환 및 오디오 제어 스크립트 -->
+    <script>
+        // 미리듣기 버튼 클릭 시 카드 링크 이동을 막고 오디오만 재생
+        function toggleAudio(audioId, event) {
+            event.stopPropagation(); // 카드 전체 클릭 이벤트(페이지 이동) 전파 차단
+            var audio = document.getElementById(audioId);
+            var allAudios = document.querySelectorAll('audio');
+            var allBtns = document.querySelectorAll('.preview-play-btn');
+            
+            allAudios.forEach(function(a) {
+                if(a.id !== audioId) {
+                    a.pause();
+                    a.currentTime = 0;
+                }
+            });
+            allBtns.forEach(function(b) {
+                if(b !== event.target) {
+                    b.innerHTML = '▶';
+                }
+            });
+
+            if (audio.paused) {
+                audio.play();
+                event.target.innerHTML = '❚❚';
+            } else {
+                audio.pause();
+                event.target.innerHTML = '▶';
+            }
+        }
+
+        // OEC 카드 클릭 시 부드러운 페이드 아웃 후 OEC Page1.html로 이동하는 연출
+        function goToOECPage(event) {
+            // 만약 미리듣기 버튼을 눌렀다면 페이지 이동 방지
+            if (event.target.closest('.preview-play-btn')) return;
+
+            event.preventDefault();
+            document.body.classList.add('fade-out');
+
+            // 0.6초 페이드 아웃 애니메이션 후 페이지 전환
+            setTimeout(function() {
+                window.location.href = 'OEC Page1.html';
+            }, 600);
+        }
+    </script>
+
+</body>
+</html>
