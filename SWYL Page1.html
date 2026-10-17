@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>선율려 (旋律呂) — SWYL | Official Artist Archive</title>
+  <!-- 구글 정갈한 명조 웹폰트 로드 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* 기본 리셋 & 고해상도 글꼴 설정 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #e6dac3;
+      background-image: url('SWYL BG2.png');
+      background-repeat: no-repeat;
+      background-position: center top;
+      background-size: cover;
+      background-attachment: fixed;
+      color: #f1f5f9;
+      font-family: 'Pretendard', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.85;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* 조명을 비춘 듯 은은하고 화사하게 밝힌 한지 투영 오버레이 */
+    .page-overlay {
+      background: rgba(20, 18, 14, 0.45);
+      backdrop-filter: blur(1.5px);
+      -webkit-backdrop-filter: blur(1.5px);
+      min-height: 100vh;
+      padding: 60px 20px 100px;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    /* 상단 헤더 */
+    header {
+      text-align: center;
+      margin-bottom: 55px;
+    }
+    .brand-sub {
+      font-size: 0.95rem;
+      letter-spacing: 6px;
+      color: #cbd5e1;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      font-weight: 600;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+    }
+
+    /* 최상단 브랜드 타이틀: 자간 확장 및 명조 웹폰트 전면 적용 (뭉침 완전 해결) */
+    .brand-title {
+      font-size: 3.4rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #f8fafc;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .brand-name-kr {
+      font-family: 'Gowun Batang', 'Noto Serif KR', 'Batang', serif;
+      font-weight: 700;
+      letter-spacing: 8px; /* 글자 간격을 넉넉히 벌려 뭉침 현상 원천 차단 */
+      margin-right: 6px;
+      color: #e2e8f0;
+    }
+    .brand-name-en {
+      font-family: 'Montserrat', 'Pretendard', sans-serif;
+      font-weight: 800;
+      letter-spacing: 5px;
+      color: #94a3b8;
+      font-size: 2.7rem;
+    }
+
+    /* 앨범 메인 소개 레이아웃 */
+    .album-hero-grid {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      gap: 50px;
+      align-items: start;
+      background: rgba(48, 44, 28, 0.88);
+      border: 1px solid rgba(217, 180, 112, 0.4);
+      border-radius: 20px;
+      padding: 50px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.55);
+      margin-bottom: 50px;
+    }
+
+    /* 좌측: 앨범 커버 프레임 */
+    .album-cover-wrapper {
+      position: sticky;
+      top: 40px;
+      width: 100%;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.75),
+                  0 0 25px rgba(217, 180, 112, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      transition: transform 0.4s ease;
+    }
+    .album-cover-wrapper:hover {
+      transform: translateY(-5px);
+    }
+    .album-cover-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* 우측: 앨범 소개 컨텐츠 */
+    .album-info-content {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    
+    .album-header-block {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .album-badge {
+      display: inline-block;
+      align-self: flex-start;
+      padding: 8px 18px;
+      background: rgba(180, 140, 60, 0.35);
+      border: 1px solid rgba(234, 190, 110, 0.5);
+      border-radius: 30px;
+      color: #fef08a;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+    }
+    .album-main-title {
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.3;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+    }
+    .album-sub-title {
+      font-size: 1.2rem;
+      color: #fef08a;
+      font-weight: 500;
+      line-height: 1.6;
+      letter-spacing: 0.5px;
+    }
+
+    /* 메인 카피 인용구 */
+    .quote-box {
+      border-left: 4px solid #eab308;
+      margin: 4px 0;
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: #f8fafc;
+      line-height: 1.8;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 20px 24px;
+      border-radius: 0 12px 12px 0;
+    }
+
+    /* 세부 서사 단락 */
+    .story-paragraph {
+      color: #f1f5f9;
+      font-size: 1.03rem;
+      text-align: justify;
+      word-break: keep-all;
+      line-height: 1.9;
+    }
+    .story-paragraph p {
+      margin-bottom: 18px;
+    }
+
+    /* 스트리밍 및 실행 버튼 영역 */
+    .action-block {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 10px;
+    }
+    .action-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .btn-stream {
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.98rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #a16207, #713f12);
+      color: #ffffff;
+      border: 1px solid rgba(254, 240, 138, 0.4);
+      box-shadow: 0 4px 18px rgba(161, 98, 7, 0.4);
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #ca8a04, #854d0e);
+      box-shadow: 0 6px 22px rgba(202, 138, 4, 0.6);
+    }
+    
+    /* 스트리밍 플랫폼 아이콘 바 */
+    .platform-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 20px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      flex-wrap: wrap;
+    }
+    .platform-label {
+      font-size: 0.85rem;
+      color: #e2e8f0;
+      font-weight: 500;
+      margin-right: 6px;
+    }
+    .platform-link {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 14px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(234, 179, 8, 0.35);
+      border-radius: 20px;
+      color: #f1f5f9;
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .platform-link:hover {
+      background: rgba(202, 138, 4, 0.35);
+      border-color: #fef08a;
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    /* MV 비디오 플레이어 섹션 */
+    .mv-section {
+      background: rgba(48, 44, 28, 0.88);
+      border-radius: 20px;
+      padding: 40px;
+      border: 1px solid rgba(217, 180, 112, 0.35);
+      margin-bottom: 50px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.55);
+    }
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* 🏛️ 아티스트 영구 철학 공간 */
+    .philosophy-section {
+      background: linear-gradient(135deg, rgba(54, 48, 30, 0.92), rgba(36, 32, 20, 0.95));
+      border: 1px solid rgba(217, 180, 112, 0.4);
+      border-radius: 20px;
+      padding: 50px;
+      margin-bottom: 50px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 45px;
+      align-items: center;
+    }
+    .philosophy-image-frame {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.85);
+    }
+    .philosophy-image-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .philosophy-content {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .philosophy-tag {
+      font-size: 0.88rem;
+      letter-spacing: 3px;
+      color: #fef08a;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .philosophy-title {
+      font-size: 1.95rem;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.4;
+      letter-spacing: -0.5px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+    }
+    .philosophy-desc {
+      color: #f1f5f9;
+      font-size: 1.03rem;
+      line-height: 1.9;
+      word-break: keep-all;
+    }
+
+    /* 트랙리스트 섹션 */
+    .archive-section {
+      background: rgba(48, 44, 28, 0.88);
+      border-radius: 20px;
+      padding: 40px;
+      border: 1px solid rgba(217, 180, 112, 0.35);
+      margin-bottom: 50px;
+    }
+    .section-title {
+      font-size: 1.6rem;
+      color: #ffffff;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-title::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 22px;
+      background: #eab308;
+      border-radius: 2px;
+    }
+
+    .track-list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .track-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 24px 28px;
+      transition: all 0.3s ease;
+    }
+    .track-card:hover {
+      background: rgba(202, 138, 4, 0.15);
+      border-color: rgba(254, 240, 138, 0.4);
+    }
+    .track-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 16px;
+    }
+    .track-left {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .track-num {
+      color: #fef08a;
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+    .track-title-text {
+      color: #ffffff;
+      font-size: 1.15rem;
+      font-weight: 600;
+    }
+    .title-track-badge {
+      font-size: 0.75rem;
+      padding: 3px 10px;
+      background: linear-gradient(135deg, #ca8a04, #854d0e);
+      color: #ffffff;
+      font-weight: 700;
+      border-radius: 4px;
+      margin-left: 8px;
+      letter-spacing: 1px;
+    }
+    
+    .audio-player-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .audio-player-wrapper audio {
+      height: 36px;
+      outline: none;
+      filter: invert(0.85) sepia(0.3) saturate(1.5) hue-rotate(5deg);
+      border-radius: 20px;
+    }
+    .preview-badge {
+      font-size: 0.78rem;
+      color: #e2e8f0;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .track-story-desc {
+      background: rgba(0, 0, 0, 0.25);
+      border-left: 3px solid #eab308;
+      padding: 14px 18px;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.96rem;
+      color: #f1f5f9;
+      line-height: 1.8;
+      word-break: keep-all;
+    }
+
+    .dedication-banner {
+      background: linear-gradient(135deg, rgba(6, 78, 59, 0.78), rgba(14, 30, 22, 0.95));
+      border: 1px solid rgba(167, 243, 208, 0.4);
+      border-radius: 16px;
+      padding: 36px 40px;
+      margin-bottom: 50px;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    }
+    .dedication-tag-header {
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      color: #a7f3d0;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    .dedication-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+    }
+    .dedication-desc {
+      font-size: 1.12rem;
+      color: #e2e8f0;
+      word-break: keep-all;
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    .discography-section {
+      background: rgba(48, 44, 28, 0.88);
+      border-radius: 20px;
+      padding: 40px;
+      border: 1px solid rgba(217, 180, 112, 0.35);
+    }
+    .discography-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    .carousel-hint {
+      font-size: 0.88rem;
+      color: #cbd5e1;
+    }
+    .carousel-container {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      padding-bottom: 15px;
+      scroll-behavior: smooth;
+    }
+    .carousel-container::-webkit-scrollbar {
+      height: 6px;
+    }
+    .carousel-container::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 3px;
+    }
+    .carousel-container::-webkit-scrollbar-thumb {
+      background: rgba(202, 138, 4, 0.5);
+      border-radius: 3px;
+    }
+    .carousel-container::-webkit-scrollbar-thumb:hover {
+      background: rgba(234, 179, 8, 0.8);
+    }
+
+    .album-card-mini {
+      flex: 0 0 200px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      padding: 14px;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .album-card-mini:hover {
+      transform: translateY(-6px);
+      border-color: #fef08a;
+      background: rgba(202, 138, 4, 0.2);
+    }
+    .album-card-mini img {
+      width: 100%;
+      height: 172px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+    .card-mini-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #ffffff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .card-mini-sub {
+      font-size: 0.8rem;
+      color: #fef08a;
+      margin-top: 4px;
+    }
+
+    @media (max-width: 992px) {
+      .album-hero-grid, .philosophy-section {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        padding: 30px;
+      }
+      .album-cover-wrapper, .philosophy-image-frame {
+        max-width: 380px;
+        margin: 0 auto;
+        position: static;
+      }
+      .track-header-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .audio-player-wrapper {
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-overlay">
+    <div class="container">
+
+      <!-- 상단 헤더 -->
+      <header>
+        <div class="brand-sub">Nature & Oriental & Crossover</div>
+        <h1 class="brand-title">
+          <span class="brand-name-kr">선율려</span>
+          <span style="font-weight: 400; color: #e2e8f0; font-size: 2.8rem; letter-spacing: 2px;">(旋律呂)</span>
+          <span style="color: #64748b; font-weight: 300;">—</span> 
+          <span class="brand-name-en">SWYL</span>
+        </h1>
+      </header>
+
+      <!-- 최신 앨범 상세소개 구역 -->
+      <main class="album-hero-grid">
+        
+        <div class="album-cover-wrapper">
+          <img src="SWYL Vol.1.png" alt="선율려 1집 Weathering Album Cover">
+        </div>
+
+        <div class="album-info-content">
+          
+          <div class="album-header-block">
+            <span class="album-badge">The 1st Album</span>
+            <h2 class="album-main-title">Weathering (풍화)</h2>
+            <div class="album-sub-title">세월의 바람 속에서 깎이고 다듬어져 마침내 찬란한 본질로 남는 것들</div>
+          </div>
+
+          <div class="quote-box">
+            "자연과 인간의 시간이 만들어낸 흔적, 그 속에서 더욱 아름답게 빛나는 풍경들!"
+          </div>
+
+          <div class="story-paragraph">
+            <p>
+              독창적인 음악 세계를 펼쳐 보이는 아티스트 선율려(旋律呂)가 첫 번째 정규 앨범 《Weathering》을 선보입니다.
+            </p>
+            <p>
+              평온한 시간의 흐름을 관통하며, 소리의 파동을 통해 영혼을 정화하는 여정을 담았습니다.
+            </p>
+          </div>
+
+          <div class="action-block">
+            <div class="action-row">
+              <a href="#tracklist" class="btn-stream btn-primary">음원 미리듣기 (Preview)</a>
+            </div>
+            
+            <div class="platform-bar">
+              <span class="platform-label">STREAM NOW:</span>
+              <a href="https://www.melon.com" target="_blank" class="platform-link">멜론 (Melon)</a>
+              <a href="https://open.spotify.com" target="_blank" class="platform-link">Spotify</a>
+              <a href="https://music.bugs.co.kr" target="_blank" class="platform-link">벅스 (Bugs)</a>
+              <a href="https://vibe.naver.com" target="_blank" class="platform-link">바이브 (VIBE)</a>
+              <a href="https://music.apple.com" target="_blank" class="platform-link">Apple Music</a>
+            </div>
+          </div>
+
+        </div>
+
+      </main>
+
+      <!-- 타이틀곡 MV 동영상 플레이어 섹션 -->
+      <section id="mv-player" class="mv-section">
+        <h3 class="section-title">Official Music Video</h3>
+        <div class="video-container">
+          <iframe 
+            src="https://www.youtube.com/embed/YOUR_SWYL_YOUTUBE_VIDEO_ID" 
+            title="선율려(SWYL) - 상선약수(上善若水) Official Music Video" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      </section>
+
+      <!-- 🏛️ 아티스트 영구 철학 공간 -->
+      <section class="philosophy-section">
+        <div class="philosophy-image-frame">
+          <img src="10cowP.png" alt="선율려 아티스트 정신 - 십우도(十牛圖) 기우귀가">
+        </div>
+        <div class="philosophy-content">
+          <div class="philosophy-tag">ARTIST PHILOSOPHY</div>
+          <h3 class="philosophy-title">"소리와 함께하는 참된 평정"</h3>
+          <div class="philosophy-desc">
+            <p>
+              소를 찾아 나섰던 동자가 소의 등 위에 앉아 한 자루 피리를 불며 집으로 돌아오듯, 선율려(旋律呂)의 음악은 어지러운 세상을 떠돌던 영혼이 비로소 자신의 본래 모습을 회복해 가는 성찰의 여정입니다.
+            </p>
+            <p style="margin-top: 12px;">
+              선율려는 대자연과 동양의 숨결이 하나 되는 크로스오버 선율을 통해 영혼의 고요한 안식처를 선사합니다.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 트랙 아카이브 & 트랙별 세부 서사 섹션 -->
+      <section id="tracklist" class="archive-section">
+        <h3 class="section-title">Tracklist & Audio Preview (일부 듣기)</h3>
+        <div class="track-list">
+          
+          <div class="track-card">
+            <div class="track-header-row">
+              <div class="track-left">
+                <span class="track-num">01</span>
+                <span class="track-title-text">Forever Promise (영원한 약속)</span>
+              </div>
+              <div class="audio-player-wrapper">
+                <span class="preview-badge">미리듣기</span>
+                <audio controls controlsList="nodownload">
+                  <source src="forever_promise_preview.mp3" type="audio/mpeg">
+                </audio>
+              </div>
+            </div>
+            <div class="track-story-desc">
+              <strong>“모든 생명이 처음 이 땅에 딛고 섰을 때, 혹은 저마다의 가슴에 품었던 가장 순수했던 결의.”</strong><br>
+              오늘날 우리는 바쁘게 흘러가는 시간과 세상의 풍파 속에서 내가 누구이며 어디로 향하고 있는지에 대한 근원적인 약속들을 잊은 채 살아갑니다. 이 곡은 지구별에서 환생한 인류의 서약부터, 한 생명이 품었던 순정한 서원에 이르기까지—만고의 시간 속에 희미해진 영혼의 결을 어루만집니다. 잊고 지냈던 본연의 모습을 마주하는 시간, 깊은 울림을 주는 서곡입니다.
+            </div>
+          </div>
+
+          <div class="track-card">
+            <div class="track-header-row">
+              <div class="track-left">
+                <span class="track-num">02</span>
+                <span class="track-title-text">상선약수 (上善若水)</span>
+                <span class="title-track-badge">TITLE</span>
+              </div>
+              <div class="audio-player-wrapper">
+                <span class="preview-badge">미리듣기</span>
+                <audio controls controlsList="nodownload">
+                  <source src="상선약수_preview.mp3" type="audio/mpeg">
+                </audio>
+              </div>
+            </div>
+            <div class="track-story-desc">
+              <strong>“가장 완벽한 선은 물과 같다. 물은 만물을 이롭게 하되 다투지 않고, 모두가 싫어하는 낮은 곳으로 처하느니.”</strong><br>
+              앨범의 중심을 묵묵히 지탱하는 타이틀곡 〈상선약수〉는 중저음의 대나무 피리가 깊은 울림을 자아내는 곡입니다. 묵직하면서도 아스라이 가라앉는 호흡을 통해 모든 것을 품으면서도 다투지 않는 물의 덕성을 전하고 싶었습니다. 마음을 고요하고 단단한 평정의 세계로 인도합니다.
+            </div>
+          </div>
+
+          <div class="track-card">
+            <div class="track-header-row">
+              <div class="track-left">
+                <span class="track-num">03</span>
+                <span class="track-title-text">Weathering (풍화)</span>
+              </div>
+              <div class="audio-player-wrapper">
+                <span class="preview-badge">미리듣기</span>
+                <audio controls controlsList="nodownload">
+                  <source src="weathering_preview.mp3" type="audio/mpeg">
+                </audio>
+              </div>
+            </div>
+            <div class="track-story-desc">
+              <strong>비바람과 모진 세월을 견뎌내며 비로소 완성되는 아름다움을 노래하는 곡.</strong><br>
+              도입부를 여는 맑고도 애잔한 아이리쉬 플룻(Irish Flute)의 멜로디는 아스라이 밀려오는 그리움과 서정을 자극합니다. 여기에 웅장한 오케스트레이션과 합창단의 소리가 어우러져 숭고한 분위기를 자아냅니다. 시련을 넘어 마침내 찾아오는 찬란한 여명처럼, 어둠을 뚫고 피어나는 희망의 에너지를 선사합니다.
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="dedication-banner">
+        <div class="dedication-tag-header">ARTIST DEDICATION</div>
+        <h3 class="dedication-title">"마음이 흐르는 음악, 영혼이 쉬어가는 곳 ─ 高山流水를 꿈꾸며 ─"</h3>
+        <p class="dedication-desc">
+          바람을 타고 흐르는 선율려의 맑은 향기가 지친 영혼의 숨결을 어루만집니다.
+        </p>
+      </section>
+
+      <section class="discography-section">
+        <div class="discography-header">
+          <h3 class="section-title" style="margin-bottom:0;">Discography & Albums</h3>
+          <span class="carousel-hint">← 가로로 스크롤하여 앨범 탐색 →</span>
+        </div>
+        
+        <div class="carousel-container">
+          <div class="album-card-mini" style="border-color: #fef08a;">
+            <img src="SWYL Vol.1.png" alt="선율려 1집 Weathering">
+            <div class="card-mini-title">Weathering (풍화)</div>
+            <div class="card-mini-sub">SWYL Vol.1 (2026)</div>
+          </div>
+
+          <div class="album-card-mini">
+            <div style="width:100%; height:172px; background:rgba(255,255,255,0.05); border-radius:8px; display:flex; align-items:center; justify-content:center; color:#94a3b8; font-size:0.85rem;">COMING SOON</div>
+            <div class="card-mini-title" style="color:#94a3b8;">SWYL Vol.2</div>
+            <div class="card-mini-sub" style="color:#64748b;">Upcoming</div>
+          </div>
+
+          <div class="album-card-mini">
+            <div style="width:100%; height:172px; background:rgba(255,255,255,0.05); border-radius:8px; display:flex; align-items:center; justify-content:center; color:#94a3b8; font-size:0.85rem;">COMING SOON</div>
+            <div class="card-mini-title" style="color:#94a3b8;">SWYL Vol.3</div>
+            <div class="card-mini-sub" style="color:#64748b;">Upcoming</div>
+          </div>
+
+          <div class="album-card-mini">
+            <div style="width:100%; height:172px; background:rgba(255,255,255,0.05); border-radius:8px; display:flex; align-items:center; justify-content:center; color:#94a3b8; font-size:0.85rem;">COMING SOON</div>
+            <div class="card-mini-title" style="color:#94a3b8;">SWYL Vol.4</div>
+            <div class="card-mini-sub" style="color:#64748b;">Upcoming</div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+</body>
+</html>
