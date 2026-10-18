@@ -160,7 +160,6 @@
       margin-bottom: 18px;
     }
 
-    /* 하늘 너머 강조 블록 */
     .highlight-story {
       background: linear-gradient(90deg, rgba(59, 130, 246, 0.15), transparent);
       padding: 20px 24px;
@@ -171,7 +170,6 @@
       line-height: 1.8;
     }
 
-    /* 스트리밍 및 실행 버튼 영역 */
     .action-block {
       display: flex;
       flex-direction: column;
@@ -202,7 +200,6 @@
       box-shadow: 0 6px 22px rgba(59, 130, 246, 0.6);
     }
     
-    /* 스트리밍 플랫폼 아이콘 바 (상단) */
     .platform-bar {
       display: flex;
       align-items: center;
@@ -237,7 +234,6 @@
       transform: translateY(-2px);
     }
 
-    /* 헌정 배너 (한자 병기 및 마감 부호 최종 적용) */
     .dedication-banner {
       background: linear-gradient(135deg, rgba(30, 58, 138, 0.55), rgba(10, 20, 38, 0.9));
       border: 1px solid rgba(147, 197, 253, 0.4);
@@ -271,7 +267,6 @@
       font-style: italic;
     }
 
-    /* MV 비디오 플레이어 섹션 */
     .mv-section {
       background: rgba(10, 20, 38, 0.85);
       border-radius: 20px;
@@ -298,7 +293,6 @@
       border: 0;
     }
 
-    /* 트랙리스트 섹션 */
     .archive-section {
       background: rgba(10, 20, 38, 0.85);
       border-radius: 20px;
@@ -389,12 +383,12 @@
       border-radius: 4px;
     }
 
-    /* 가로 스크롤 앨범 아카이브 캐러셀 섹션 */
     .discography-section {
       background: rgba(10, 20, 38, 0.85);
       border-radius: 20px;
       padding: 40px;
       border: 1px solid rgba(96, 165, 250, 0.25);
+      margin-bottom: 40px;
     }
     .discography-header {
       display: flex;
@@ -464,7 +458,74 @@
       margin-top: 4px;
     }
 
-    /* 반응형 모바일 처리 */
+    /* [원칙 B 완벽 준수] 상단 독립 홈 버튼 모듈 */
+    #rq-artist-top-nav {
+      position: fixed;
+      top: 25px;
+      right: 35px;
+      z-index: 99999;
+      pointer-events: auto;
+    }
+    .rq-home-btn {
+      background: rgba(10, 20, 38, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(96, 165, 250, 0.5);
+      color: #93c5fd;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+      transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+      display: inline-block;
+      font-family: 'Pretendard', sans-serif;
+    }
+    .rq-home-btn:hover {
+      background: #3b82f6;
+      color: #ffffff;
+      border-color: #60a5fa;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(59, 130, 246, 0.4);
+    }
+
+    /* [원칙 B 완벽 준수] 하단 독립 이전 페이지 버튼 모듈 */
+    #rq-artist-bottom-nav {
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 10;
+    }
+    .rq-back-btn {
+      background: rgba(10, 20, 38, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(96, 165, 250, 0.5);
+      color: #93c5fd;
+      padding: 14px 36px;
+      border-radius: 30px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+      transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+      display: inline-block;
+      font-family: 'Pretendard', sans-serif;
+    }
+    .rq-back-btn:hover {
+      background: #3b82f6;
+      color: #ffffff;
+      border-color: #60a5fa;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(59, 130, 246, 0.4);
+    }
+
     @media (max-width: 992px) {
       .album-hero-grid {
         grid-template-columns: 1fr;
@@ -492,6 +553,11 @@
 </head>
 <body>
 
+  <!-- [원칙 B 준수] 상단 독립 홈 버튼 모듈 -->
+  <div id="rq-artist-top-nav">
+    <a href="index.html" class="rq-home-btn">HOME</a>
+  </div>
+
   <div class="page-overlay">
     <div class="container">
 
@@ -504,12 +570,10 @@
       <!-- 앨범 상세소개 구역 -->
       <main class="album-hero-grid">
         
-        <!-- 좌측: 앨범 커버 이미지 -->
         <div class="album-cover-wrapper">
           <img src="Sky Guitar Vo.1.png" alt="Sky Guitar Vol.1 Music Beyond the Sky Album Cover">
         </div>
 
-        <!-- 우측: 앨범 소개 서사 및 스트리밍 링크 -->
         <div class="album-info-content">
           
           <div class="album-header-block">
@@ -545,13 +609,11 @@
             </p>
           </div>
 
-          <!-- 상단 스트리밍 연결 및 행동 버튼 영역 -->
           <div class="action-block">
             <div class="action-row">
               <a href="#tracklist" class="btn-stream btn-primary">음원 미리듣기 (Preview)</a>
             </div>
             
-            <!-- 유료 스트리밍 플랫폼 아이콘 연결 바 -->
             <div class="platform-bar">
               <span class="platform-label">STREAM NOW:</span>
               <a href="https://www.melon.com" target="_blank" class="platform-link">멜론 (Melon)</a>
@@ -566,7 +628,6 @@
 
       </main>
 
-      <!-- 헌정 배너 (한자 병기 및 느낌표 위치 최종 확정 적용) -->
       <section class="dedication-banner">
         <div class="dedication-tag-header">ARTIST DEDICATION</div>
         <h3 class="dedication-title">"영원한 음악의 위안(慰安)! Sky Guitar를 위하여..."</h3>
@@ -575,7 +636,6 @@
         </p>
       </section>
 
-      <!-- 타이틀곡 MV 동영상 플레이어 섹션 -->
       <section id="mv-player" class="mv-section">
         <h3 class="section-title">Official Music Video</h3>
         <div class="video-container">
@@ -588,12 +648,10 @@
         </div>
       </section>
 
-      <!-- 트랙 아카이브 & 일부 미리듣기 섹션 -->
       <section id="tracklist" class="archive-section">
         <h3 class="section-title">Tracklist & Audio Preview (일부 듣기)</h3>
         <div class="track-list">
           
-          <!-- Track 01 -->
           <div class="track-item">
             <div class="track-left">
               <span class="track-num">01</span>
@@ -607,7 +665,6 @@
             </div>
           </div>
 
-          <!-- Track 02 (타이틀곡 지정) -->
           <div class="track-item">
             <div class="track-left">
               <span class="track-num">02</span>
@@ -622,7 +679,6 @@
             </div>
           </div>
 
-          <!-- Track 03 -->
           <div class="track-item">
             <div class="track-left">
               <span class="track-num">03</span>
@@ -639,7 +695,6 @@
         </div>
       </section>
 
-      <!-- 확장형 Discography 가로 슬라이더 아카이브 -->
       <section class="discography-section">
         <div class="discography-header">
           <h3 class="section-title" style="margin-bottom:0;">Discography & Albums</h3>
@@ -673,6 +728,17 @@
         </div>
       </section>
 
+      <!-- [원칙 B 준수] 하단 독립 이전 페이지(메인으로) 버튼 모듈 -->
+      <div id="rq-artist-bottom-nav">
+        <a href="index.html" class="rq-back-btn">이전 페이지 (HOME)</a>
+      </div>
+
+<!-- 통일된 저작권 푸터 -->
+<div style="width: 100%; text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.15);">
+    <p style="color: #ffd700; font-weight: bold; margin-bottom: 8px;">© 2026 REFLECTION-Q. All Rights Reserved.</p>
+    <p style="color: #cccccc; font-size: 0.85rem; margin-bottom: 4px;">사전 승인 없는 무단 복제, 배포, 및 상업적 이용을 엄격히 금합니다.</p>
+    <p style="color: #888888; font-size: 0.75rem;">Unauthorized copying, distribution, and commercial use without prior consent is strictly prohibited.</p>
+</div>
     </div>
   </div>
 
