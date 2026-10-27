@@ -311,6 +311,7 @@
             color:#fbbf24!important
         }
 
+}
         /* 하단 가로 스크롤 프로젝트 섹션 */
         .projects-section {
             width: 100%;
@@ -475,7 +476,108 @@
         }
     }
 
+/* Sound Lab Banner Style */
+.sound-lab-banner-section {
+  width: 100%;
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
 
+.sound-lab-card {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  border-radius: 24px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+}
+
+.sound-lab-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(212, 175, 55, 0.5);
+}
+
+.sound-lab-bg {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.8s ease;
+}
+
+.sound-lab-card:hover .sound-lab-bg {
+  transform: scale(1.04);
+}
+
+.sound-lab-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(180deg, rgba(10, 12, 16, 0.3) 0%, rgba(10, 12, 16, 0.85) 100%);
+}
+
+.sound-lab-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 40px;
+  box-sizing: border-box;
+  color: #F5F5F0;
+  text-align: left;
+}
+
+.sound-lab-badge {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #D4AF37;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.sound-lab-title {
+  font-family: 'Cinzel', serif, 'Batang';
+  font-size: 26px;
+  letter-spacing: 1.5px;
+  margin: 0 0 12px 0;
+  color: #FFFFFF;
+}
+
+.sound-lab-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #D1D5DB;
+  margin: 0 0 24px 0;
+  max-width: 650px;
+}
+
+.sound-lab-btn {
+  align-self: flex-start;
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 30px;
+  color: #F5F5F0;
+  font-size: 13px;
+  letter-spacing: 1px;
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.sound-lab-card:hover .sound-lab-btn {
+  background: #D4AF37;
+  color: #0A0C10;
+  border-color: #D4AF37;
+  font-weight: 600;
+}
     </style>
 </head>
 <body>
@@ -553,7 +655,24 @@
         </div>
 
     </div>
-
+<!-- QUANTUM SOUND LAB & CONTROL ROOM BANNER -->
+<section class="sound-lab-banner-section">
+  <div class="sound-lab-card">
+    <div class="sound-lab-bg" style="background-image: url('watermarked_img_12339048372799165312.png');"></div>
+    <div class="sound-lab-overlay"></div>
+    <div class="sound-lab-content">
+      <span class="sound-lab-badge">INFRASTRUCTURE &amp; TECHNOLOGY</span>
+      <h2 class="sound-lab-title">QUANTUM SOUND LAB &amp; CONTROL ROOM</h2>
+      <p class="sound-lab-desc">
+        보이지 않는 곳에서 완성되는 가장 완벽한 울림 —<br>
+        최첨단 디지털 DAW 스케일과 하이엔드 아날로그 인프라의 미니멀 융합
+      </p>
+      <button type="button" class="sound-lab-btn">
+        사운드 인프라 &amp; 장비 정보 탐색 <span>&rarr;</span>
+      </button>
+    </div>
+  </div>
+</section>
     <!-- 프로젝트 하단 가로 스크롤 섹션 (총 5개 카드) -->
     <div class="projects-section">
         <h2 class="section-title">REFLECTION-Q PROJECTS</h2>
