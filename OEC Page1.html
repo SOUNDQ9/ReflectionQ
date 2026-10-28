@@ -397,6 +397,11 @@
       flex-wrap: wrap;
       gap: 15px;
     }
+    .track-item audio {
+  flex: 1;
+  max-width: 600px;
+  margin-left: auto;
+}
     .track-item:hover {
       background: rgba(212, 175, 55, 0.09);
       border-color: rgba(212, 175, 55, 0.3);
@@ -702,9 +707,9 @@
         </div>
       </section>
 
-      <!-- 트랙 아카이브 & 일부 미리듣기 섹션 -->
+      <!-- 트랙 아카이브 듣기 섹션 -->
       <section id="tracklist" class="archive-section">
-        <h3 class="section-title">Tracklist & Audio Preview (일부 듣기)</h3>
+        <h3 class="section-title">Tracklist & Audio  (전곡 듣기)</h3>
         <div class="track-list">
           
           <!-- Track 01 -->
@@ -714,7 +719,7 @@
               <span class="track-title-text">Amber Drift</span>
             </div>
             <div class="audio-player-wrapper">
-              <span class="preview-badge">미리듣기</span>
+              <span class="preview-badge">듣기</span>
               <audio controls controlsList="nodownload">
                 <source src="amber_drift_preview.mp3" type="audio/mpeg">
               </audio>
@@ -728,7 +733,7 @@
               <span class="track-title-text">Strolling Breeze</span>
             </div>
             <div class="audio-player-wrapper">
-              <span class="preview-badge">미리듣기</span>
+              <span class="preview-badge">듣기</span>
               <audio controls controlsList="nodownload">
                 <source src="strolling_breeze_preview.mp3" type="audio/mpeg">
               </audio>
@@ -743,7 +748,7 @@
               <span class="title-track-badge">TITLE</span>
             </div>
             <div class="audio-player-wrapper">
-              <span class="preview-badge">미리듣기</span>
+              <span class="preview-badge">듣기</span>
               <audio controls controlsList="nodownload">
                 <source src="wind_of_midnight_preview.mp3" type="audio/mpeg">
               </audio>
