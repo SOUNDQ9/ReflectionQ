@@ -595,21 +595,25 @@
       }
     }
 @media (max-width: 768px) {
+  .container {
+    padding: 0 10px !important;
+  }
+
   .mv-section {
-    padding: 20px 12px;
+    padding: 20px 8px;
   }
   
   .track-item {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    padding: 14px 16px;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 16px 20px;
   }
   
   .track-item audio {
-    width: 100%;
-    max-width: 220px !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
 }
   </style>
