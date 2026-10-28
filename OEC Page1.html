@@ -432,17 +432,24 @@
       letter-spacing: 1px;
     }
     
-    .audio-player-wrapper {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-    .audio-player-wrapper audio {
-      height: 36px;
-      outline: none;
-      filter: invert(0.9) hue-rotate(180deg);
-      border-radius: 20px;
-    }
+
+.audio-player-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex: 0 1 480px;
+  min-width: 0;
+}
+.audio-player-wrapper audio {
+  height: 36px;
+  width: 100%;
+  min-width: 0;
+  flex: 1;
+  outline: none;
+  filter: invert(0.9) hue-rotate(180deg);
+  border-radius: 20px;
+}
+
     .preview-badge {
       font-size: 0.78rem;
       color: #a1a1aa;
