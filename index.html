@@ -481,9 +481,11 @@
 .sound-lab-banner-section {
   width: 100%;
   max-width: 1200px;
-  margin: 20px auto;
+  margin: -30px auto 60px auto; /* 위쪽 마진을 음수(-30px)로 당겨서 쇼케이스와의 간격을 좁히고, 아래 마진(60px)으로 프로젝트 텍스트와 간격을 확보 */
   padding: 0 20px;
   box-sizing: border-box;
+  position: relative;
+  z-index: 10;
 }
 
 .sound-lab-card {
